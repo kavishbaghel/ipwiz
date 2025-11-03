@@ -44,8 +44,8 @@ var rangeCmd = &cobra.Command{
 		for i := 0; i < hostBits; i++ {
 			base = base * 2
 		}
-		fmt.Printf("\nCalculating range from cidr -> \n \n")
-		fmt.Printf("CIDR: %s \n \nStarting IP Address: %s \n \nEnding IP Address: %s \n \nNumber of Hosts: %d \n \n", args[0], startIp, endIP, base)
+		fmt.Printf("\n Calculating range from cidr -> \n \n")
+		fmt.Printf(" CIDR: %s \n \n Starting IP Address: %s \n \n Ending IP Address: %s \n \n Number of Hosts: %d \n \n", args[0], startIp, endIP, base)
 	},
 }
 
