@@ -34,6 +34,25 @@ var cidrCmd = &cobra.Command{
 			panic("The start and end IPs should of the same family (IPv4 or IPv6)")
 		}
 
+		var cidr []netaddr.IPPrefix
+		curr := startIp
+		for {
+			maxBits := 32
+			if startIp.Is6() {
+				maxBits = 128
+			}
+
+			prefixLen := maxBits
+			for prefixLen > 0 {
+				prefix := netaddr.IPPrefixFrom(curr, uint8(prefixLen))
+				r := prefix.Range()
+				if r.To().Compare(endIp) > 0 {
+					break
+				}
+				prefixLen--
+			}
+		}
+
 	},
 }
 
