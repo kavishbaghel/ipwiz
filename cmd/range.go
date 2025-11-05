@@ -29,7 +29,23 @@ var rangeCmd = &cobra.Command{
 		startIp := networkRange.From()
 		endIP := networkRange.To()
 
-		fmt.Printf("\n Starting IP Address: %s \n \n Ending IP Address: %s \n", startIp, endIP)
+		// Calculate the host count
+
+		bits := int(CidrRange.Bits())
+		var totalBits int
+		if CidrRange.IP().Is4() {
+			totalBits = 32
+		} else {
+			totalBits = 128
+		}
+
+		hostBits := totalBits - bits
+		base := 1
+		for i := 0; i < hostBits; i++ {
+			base = base * 2
+		}
+		fmt.Printf("\n Calculating range from cidr -> \n \n")
+		fmt.Printf(" CIDR: %s \n \n Starting IP Address: %s \n \n Ending IP Address: %s \n \n Number of Hosts: %d \n \n", args[0], startIp, endIP, base)
 	},
 }
 
